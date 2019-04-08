@@ -14,7 +14,7 @@ const products = [
     'pet-sweep.jpg',
     'scissors.jpg',
     'shark.jpg',
-    'sweep.jpg',
+    'sweep.png',
     'tauntaun.jpg',
     'unicorn.jpg',
     'usb.gif',
@@ -89,8 +89,8 @@ function showRandProduct(event){
             var li = document.createElement('li');
             var info = '';
             current.views === 0 ?
-                info += ` | 0 votes for ${current.name}`:
-                info += ` | ${current.vote} votes for ${current.name}`;
+                info += `0 votes for ${current.name}`:
+                info += `${current.vote} votes for ${current.name}`;
             li.innerText = info;
             ul.appendChild(li);
         });
