@@ -22,7 +22,7 @@ const products = [
     'wine-glass.jpg'
 ];
 const productArray = [];
-let userClicks = 0;
+var userClicks = 0;
 let clickLimit = 25;
 const imgElments = document.getElementsByClassName('product');
 var prevProducts = [];
@@ -44,9 +44,19 @@ products.forEach(product => {
 });
 
 
-function showRandProduct(){
+function showRandProduct(event){
     const productIndexes = [];
     const productsToBeSeen = [];
+    userClicks++;
+    if (event) {
+        var clickedProduct = event.target.alt;
+        productArray.forEach(prod => {
+            if (prod.name === clickedProduct) {
+                prod.vote++;
+            }
+        });
+    }
+
     for (let i = 0; i < imgElments.length; i++) {
         let random = randomNumGen();
         while (productIndexes.indexOf(random) !== -1 || prevProducts.indexOf(random) !== -1) {
@@ -66,6 +76,30 @@ function showRandProduct(){
         imgElments[i].alt = productsToBeSeen[i].name;
         imgElments[i].title = productsToBeSeen[i].name;
     }
+
+    if (userClicks >= clickLimit) {
+        for (var i = 0; i < imgElments.length; i++) {
+            imgElments[i].removeEventListener('click', showRandProduct);
+        }
+        var userResults = document.getElementById('product-results');
+        var ul = document.createElement('ul');
+        userResults.appendChild(ul);
+        productArray.forEach((product) => {
+            const current = product;
+            var li = document.createElement('li');
+            var info = '';
+            current.views === 0 ?
+                info += ` | 0 votes for ${current.name}`:
+                info += ` | ${current.vote} votes for ${current.name}`;
+            li.innerText = info;
+            ul.appendChild(li);
+        });
+    }
 }
 
 showRandProduct();
+userClicks--;
+
+for (var i = 0; i < imgElments.length; i++){
+    imgElments[i].addEventListener('click', showRandProduct);
+}
