@@ -1,25 +1,25 @@
 'use strict';
 const products = [
-    'bag',
-    'banana',
-    'bathroom',
-    'boots',
-    'breakfast',
-    'bubblegum',
-    'chair',
-    'cthulhu',
-    'dog-duck',
-    'dragon',
-    'pen',
-    'pet-sweep',
-    'scissors',
-    'shark',
-    'sweep',
-    'tauntaun',
-    'unicorn',
-    'usb',
-    'water-can',
-    'wine-glass'
+    'bag.jpg',
+    'banana.jpg',
+    'bathroom.jpg',
+    'boots.jpg',
+    'breakfast.jpg',
+    'bubblegum.jpg',
+    'chair.jpg',
+    'cthulhu.jpg',
+    'dog-duck.jpg',
+    'dragon.jpg',
+    'pen.jpg',
+    'pet-sweep.jpg',
+    'scissors.jpg',
+    'shark.jpg',
+    'sweep.jpg',
+    'tauntaun.jpg',
+    'unicorn.jpg',
+    'usb.gif',
+    'water-can.jpg',
+    'wine-glass.jpg'
 ];
 const productArray = [];
 let userClicks = 0;
@@ -27,9 +27,9 @@ let clickLimit = 25;
 const imgElments = document.getElementsByClassName('product');
 var prevProducts = [];
 
-const Product = function(name){
-    this.filePath = `img/${name}.jpg`;
-    this.name = name;
+const Product = function(path){
+    this.filePath = `img/${path}`;
+    this.name = path.split('.')[0];
     this.views = 0;
     this.vote = 0;
     productArray.push(this);
@@ -56,7 +56,7 @@ function showRandProduct(){
     }
     prevProducts = productIndexes;
 
-    prevProducts.forEach((item, index) => {
+    productIndexes.forEach((item, index) => {
         productsToBeSeen[index] = productArray[item];
         productArray[item].views++;
     });
