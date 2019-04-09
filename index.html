@@ -8,9 +8,12 @@
   </head>
   <body>
   <header>
+        <h1>Bus Mall</h1>
   </header>
   <main>
-    <h1>Bus Mall</h1>
+    <div>
+        <p>The app's purpose is to have the group members choose which product, of the three displayed images, that they would be most likely to purchase, and then store, calculate, and visually display the resulting data.</p>
+    </div>
     <section id="product-area">
       <ul>
         <li><img src=""  class="product" alt="" title=""></li>
@@ -18,8 +21,11 @@
         <li><img src=""  class="product" alt="" title=""></li>
       </ul>
     </section>
-    <section id="product-results"></section>
+    <section id="product-results">
+        <canvas id="product-chart" width="600" height="500"></canvas>
+    </section>
   </main>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js"></script>
   <script type="text/javascript" src="./js/app.js"></script>
 </body>
 <footer></footer>
