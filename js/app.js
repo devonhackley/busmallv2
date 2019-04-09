@@ -1,4 +1,5 @@
 'use strict';
+
 const products = [
     'bag.jpg',
     'banana.jpg',
@@ -46,12 +47,12 @@ products.forEach(product => {
 
 function showRandProduct(event){
     const productIndexes = [];
-    const productsToBeSeen = [];
+    const productsToBeSeen = []; // This holds the products that gets rendered to the dom
     userClicks++;
     if (event) {
         var clickedProduct = event.target.alt;
         productArray.forEach(prod => {
-            if (prod.name === clickedProduct) {
+            if (prod.name === clickedProduct) { // upvote the clicked product
                 prod.vote++;
             }
         });
@@ -59,6 +60,7 @@ function showRandProduct(event){
 
     for (let i = 0; i < imgElments.length; i++) {
         let random = randomNumGen();
+        // Check to make sure that no duplicates will be displayed
         while (productIndexes.indexOf(random) !== -1 || prevProducts.indexOf(random) !== -1) {
             random = randomNumGen();
         }
@@ -66,18 +68,18 @@ function showRandProduct(event){
     }
     prevProducts = productIndexes;
 
-    productIndexes.forEach((item, index) => {
+    productIndexes.forEach((item, index) => { // increment display views
         productsToBeSeen[index] = productArray[item];
         productArray[item].views++;
     });
 
-    for (let i = 0; i < imgElments.length; i++){
+    for (let i = 0; i < imgElments.length; i++){ // render products
         imgElments[i].src = productsToBeSeen[i].filePath;
         imgElments[i].alt = productsToBeSeen[i].name;
         imgElments[i].title = productsToBeSeen[i].name;
     }
 
-    if (userClicks >= clickLimit) {
+    if (userClicks >= clickLimit) { // no more clicks allowed
         for (var i = 0; i < imgElments.length; i++) {
             imgElments[i].removeEventListener('click', showRandProduct);
         }
@@ -98,7 +100,7 @@ function showRandProduct(event){
 }
 
 showRandProduct();
-userClicks--;
+userClicks--; // decrement the user clickes.
 
 for (var i = 0; i < imgElments.length; i++){
     imgElments[i].addEventListener('click', showRandProduct);
