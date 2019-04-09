@@ -1,24 +1,34 @@
+
 body {
     overflow-x: hidden;
 }
 main {
     position: relative;
+    width: 100%;
 }
-
+main div {
+   width: 100%;
+}
+main div p {
+    font-size: 20px;
+    width: 50%;
+    line-height: 2;
+    margin: 60px auto;
+}
 h1 {
-    text-align: center;
-    font-size: 30px;
+    margin-left: 42%;
     margin-top: 30px;
+    font-size: 30px;
 }
 #product-area {
     position: absolute;
-    top: 250px;
+    top: 160px;
     left:110px;
     width: 100%;
 }
 #product-results {
     position: absolute;
-    top: 550px;
+    top: 480px;
     left:390px;
     width: 100%;
 }
