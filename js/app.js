@@ -22,13 +22,13 @@ const products = [
     'water-can.jpg',
     'wine-glass.jpg'
 ];
-const productArray = [];
+var productArray = [];
 var userClicks = 0;
 let clickLimit = 25;
 const imgElments = document.getElementsByClassName('product');
 var prevProducts = [];
 const productTitles = [];
-const userVotes = [];
+var userVotes = [];
 let chart; // eslint-disable-line
 
 const Product = function(path){
@@ -44,15 +44,11 @@ function randomNumGen() {
     return Math.floor(Math.random() * productArray.length);
 }
 
-products.forEach(product => {
-    new Product(product);
-});
-
 function handleEventListener(handle){
     for (var i = 0; i < imgElments.length; i++) {
         handle === 'add' ?
-            imgElments[i].addEventListener('click', showRandProduct) :
-            imgElments[i].removeEventListener('click', showRandProduct);
+            imgElments[i].addEventListener('click', handleUserClick) :
+            imgElments[i].removeEventListener('click', handleUserClick);
     }
 }
 
@@ -75,13 +71,14 @@ function showResults(){ // eslint-disable-line
 
 function chartResults() {
     handleEventListener('remove');
+    console.log('userVotes', userVotes);
     var ctx = document.getElementById('product-chart').getContext('2d');
     chart = new Chart(ctx, { // eslint-disable-line
         type: 'bar',
         data: {
             labels:productTitles,
             datasets: [{
-                label: 'User Votes',
+                label: '# of User Votes',
                 data: userVotes,
                 backgroundColor: '#ff33bb',
                 borderColor: '#000000',
@@ -97,35 +94,45 @@ function chartResults() {
             }
         },
         scales: {
-            yAxes: [{
-                ticks: {
-                    beginAtZero: true,
-                    max: 10,
-                    min: 0,
-                    scaleOverride:true,
-                    scaleSteps:1,
-                    scaleStartValue:0,
-                    scaleStepWidth:10
-                }
-            }]
+            yAxes: [
+                {
+                    ticks: {
+                        stepSize: 1.0
+                    }
+                }]
         }
     });
 }
 
+function updateProductCount(product){
+    productArray.forEach((prod, index) => {
+        if (prod.name === product) { // upvote the clicked product
+            prod.vote++;
+            userVotes[index] += prod.vote;
+        }
+        if(!productTitles.includes(prod.name)){
+            productTitles[index] = prod.name;
+        }
+    });
+}
+function updateLocalStorage() {
+    localStorage['userVotes'] = JSON.stringify(userVotes);
+}
 
-function showRandProduct(event){
+function handleUserClick(event){
+    userClicks++;
+    updateProductCount(event.target.alt);
+    if (userClicks >= clickLimit) { // no more clicks allowed
+        chartResults();
+        updateLocalStorage();
+    }
+    showRandProduct();
+}
+
+
+function showRandProduct(){
     const productIndexes = [];
     const productsToBeSeen = []; // This holds the products that gets rendered to the dom
-    userClicks++;
-    if (event) {
-        var clickedProduct = event.target.alt;
-        productArray.forEach(prod => {
-            if (prod.name === clickedProduct) { // upvote the clicked product
-                prod.vote++;
-                userVotes.push(prod.vote);
-            }
-        });
-    }
 
     for (let i = 0; i < imgElments.length; i++) {
         let random = randomNumGen();
@@ -147,10 +154,18 @@ function showRandProduct(event){
         imgElments[i].alt = productsToBeSeen[i].name;
         imgElments[i].title = productsToBeSeen[i].name;
     }
+}
 
-    if (userClicks >= clickLimit) { // no more clicks allowed
-        chartResults();
-    }
+// check if local storage exists, handle accordingly
+if(localStorage['allProducts'] && localStorage['userVotes']) {
+    productArray = JSON.parse(localStorage['allProducts']);
+    userVotes = JSON.parse(localStorage['userVotes']);
+} else {
+    products.forEach(product => {
+        new Product(product);
+    });
+    userVotes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    localStorage['allProducts'] = JSON.stringify(productArray);
 }
 
 showRandProduct();
