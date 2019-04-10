@@ -29,7 +29,7 @@ const imgElments = document.getElementsByClassName('product');
 var prevProducts = [];
 const productTitles = [];
 const userVotes = [];
-let chart;
+let chart; // eslint-disable-line
 
 const Product = function(path){
     this.filePath = `img/${path}`;
@@ -100,12 +100,7 @@ function chartResults() {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    max: 10,
-                    min: 0,
-                    scaleOverride:true,
-                    scaleSteps:1,
-                    scaleStartValue:0,
-                    scaleStepWidth:10
+                    stepSize: 1
                 }
             }]
         }
