@@ -164,7 +164,7 @@ if(localStorage['allProducts'] && localStorage['userVotes']) {
     products.forEach(product => {
         new Product(product);
     });
-    userVotes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    userVotes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // fill with values
     localStorage['allProducts'] = JSON.stringify(productArray);
 }
 
