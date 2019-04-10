@@ -100,7 +100,12 @@ function chartResults() {
             yAxes: [{
                 ticks: {
                     beginAtZero: true,
-                    stepSize: 1
+                    max: 10,
+                    min: 0,
+                    scaleOverride:true,
+                    scaleSteps:1,
+                    scaleStartValue:0,
+                    scaleStepWidth:10
                 }
             }]
         }
@@ -144,7 +149,6 @@ function showRandProduct(event){
     }
 
     if (userClicks >= clickLimit) { // no more clicks allowed
-        // showResults();
         chartResults();
     }
 }
