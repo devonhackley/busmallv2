@@ -86,7 +86,7 @@ function chartResults() {
                 backgroundColor: '#ff33bb',
                 borderColor: '#000000',
                 borderWidth: 2,
-                hoverBackgroundColor:'#56ce2c'
+                hoverBackgroundColor:'#eeff56'
             }]
         },
         options: {

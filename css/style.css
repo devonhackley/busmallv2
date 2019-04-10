@@ -1,6 +1,7 @@
 
 body {
     overflow-x: hidden;
+    background-color: aquamarine;
 }
 main {
     position: relative;
@@ -13,18 +14,29 @@ main div p {
     font-size: 20px;
     width: 50%;
     line-height: 2;
+    word-spacing: 5px;
     margin: 60px auto;
 }
 h1 {
-    margin-left: 42%;
+    margin-left: 40%;
     margin-top: 30px;
-    font-size: 30px;
+    font-size: 50px;
+    font-weight: 700;
+    font-family: 'Courier New', Courier, monospace;
+    letter-spacing: 5px;
+    color: #ff33bb;
 }
 #product-area {
     position: absolute;
     top: 160px;
-    left:110px;
+    left:150px;
     width: 100%;
+}
+#product-area  img {
+    width: 350px;
+    height: 280px;
+    margin-left: 10px;
+    box-shadow: 0px 5px 8px 2px #3a3a3a;
 }
 #product-results {
     position: absolute;
@@ -44,8 +56,9 @@ h1 {
 
 #product-area ul li {
     float: left;
-    width: 30%;
-    padding-right: 20px;
+}
+#product-area > ul > li:nth-child(1) {
+    margin-left: 35px;
 }
 
 #product-area > ul > li:nth-child(3){
