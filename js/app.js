@@ -115,8 +115,8 @@ function updateProductCount(product){
         }
     });
 }
-function updateLocalStorage() {
-    localStorage['userVotes'] = JSON.stringify(userVotes);
+function updateLocalStorage(key, value) {
+    localStorage[key] = JSON.stringify(value);
 }
 
 function handleUserClick(event){
@@ -124,7 +124,7 @@ function handleUserClick(event){
     updateProductCount(event.target.alt);
     if (userClicks >= clickLimit) { // no more clicks allowed
         chartResults();
-        updateLocalStorage();
+        updateLocalStorage('userVotes', userVotes);
     }
     showRandProduct();
 }
@@ -165,7 +165,7 @@ if(localStorage['allProducts'] && localStorage['userVotes']) {
         const prod = new Product(product);
         userVotes.push(prod.vote); // fill with values
     });
-    localStorage['allProducts'] = JSON.stringify(productArray);
+    updateLocalStorage('allProducts', productArray);
 }
 
 showRandProduct();
