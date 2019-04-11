@@ -161,10 +161,10 @@ if(localStorage['allProducts'] && localStorage['userVotes']) {
     productArray = JSON.parse(localStorage['allProducts']);
     userVotes = JSON.parse(localStorage['userVotes']);
 } else {
-    products.forEach(product => {
-        new Product(product);
+    products.forEach((product) => {
+        const prod = new Product(product);
+        userVotes.push(prod.vote); // fill with values
     });
-    userVotes = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]; // fill with values
     localStorage['allProducts'] = JSON.stringify(productArray);
 }
 
