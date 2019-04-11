@@ -169,5 +169,4 @@ if(localStorage['allProducts'] && localStorage['userVotes']) {
 }
 
 showRandProduct();
-userClicks--; // decrement the user clickes.
 handleEventListener('add');
