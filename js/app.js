@@ -26,6 +26,7 @@ var productArray = [];
 var userClicks = 0;
 let clickLimit = 25;
 const imgElments = document.getElementsByClassName('product');
+const imgTitles = document.getElementsByClassName('product-title');
 var prevProducts = [];
 const productTitles = [];
 var userVotes = [];
@@ -153,6 +154,10 @@ function showRandProduct(){
         imgElments[i].src = productsToBeSeen[i].filePath;
         imgElments[i].alt = productsToBeSeen[i].name;
         imgElments[i].title = productsToBeSeen[i].name;
+    }
+
+    for (let i = 0; i < imgTitles.length; i++){ // render products titles
+        imgTitles[i].textContent = productsToBeSeen[i].name;
     }
 }
 
